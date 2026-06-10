@@ -29,7 +29,7 @@ jobs:
       - run: bin/debug-template examples/templates/translator.yml examples/inputs/translator.json
       - name: Build gem on legacy RubyGems
         if: matrix.ruby != '3.4'
-        run: gem build --output /tmp/lumen-llm-${{ matrix.ruby }}.gem lumen-llm.gemspec
+        run: gem build lumen-llm.gemspec
       - name: Strict gem build
         if: matrix.ruby == '3.4'
         run: gem build --strict --output /tmp/lumen-llm-${{ matrix.ruby }}.gem lumen-llm.gemspec
