@@ -1,0 +1,27 @@
+#!/usr/bin/env ruby
+
+$LOAD_PATH.unshift(File.expand_path("../lib", __dir__))
+
+require "json"
+require "lumen_llm"
+
+template_file = ARGV[0]
+input_file = ARGV[1]
+
+unless template_file && input_file
+  warn "Usage: bin/debug-template TEMPLATE.yml INPUT.json"
+  exit 1
+end
+
+template_dir = File.dirname(File.expand_path(template_file))
+template_key = File.basename(template_file, ".yml")
+input = JSON.parse(File.read(input_file))
+
+LumenLLM.configure do |config|
+  config.template_path = template_dir
+end
+
+template = LumenLLM::TemplateLoader.load(template_key)
+payload = template.render(input)
+
+puts JSON.pretty_generate(payload)

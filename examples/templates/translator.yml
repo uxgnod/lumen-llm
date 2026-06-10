@@ -1,0 +1,19 @@
+key: translator
+model: openai/gpt-5-mini
+provider: openrouter
+output_type: json
+
+system_prompt: |
+  You are a professional localization assistant for software products.
+  Translate short UI copy naturally and concisely.
+  Preserve placeholders, numbers, HTML tags, and product names.
+  Return only valid JSON. Do not use markdown.
+
+user_prompt: |
+  Translate the following source text into the target languages.
+
+  Source text: "{{source_text}}"
+  Target languages: {{target_languages_json}}
+
+  Return a JSON object using the exact same language codes from target languages as keys.
+
