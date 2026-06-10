@@ -1,3 +1,4 @@
+require "bundler/gem_tasks"
 require "rake/testtask"
 
 Rake::TestTask.new(:test) do |t|
@@ -8,4 +9,3 @@ Rake::TestTask.new(:test) do |t|
 end
 
 task :default => :test
-

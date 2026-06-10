@@ -13,15 +13,19 @@ Gem::Specification.new do |spec|
   spec.required_ruby_version = ">= 2.3"
 
   spec.metadata = {
-    "homepage_uri" => spec.homepage,
     "source_code_uri" => spec.homepage,
-    "changelog_uri" => "#{spec.homepage}/blob/main/CHANGELOG.md"
+    "changelog_uri" => "#{spec.homepage}/blob/main/CHANGELOG.md",
+    "bug_tracker_uri" => "#{spec.homepage}/issues",
+    "allowed_push_host" => "https://rubygems.org",
+    "rubygems_mfa_required" => "true"
   }
 
   spec.files = Dir[
     "CHANGELOG.md",
+    "CONTRIBUTING.md",
     "LICENSE.txt",
     "README.md",
+    "SECURITY.md",
     "AGENTS.md",
     "lib/**/*.rb",
     "examples/**/*",
@@ -32,5 +36,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ["lib"]
 
   spec.add_development_dependency "minitest", ">= 5.10", "< 5.16"
+  spec.add_development_dependency "mutex_m", ">= 0.1", "< 0.2"
   spec.add_development_dependency "rake", ">= 12.3", "< 14"
 end

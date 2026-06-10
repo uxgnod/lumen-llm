@@ -1,5 +1,8 @@
 # lumen-llm
 
+[![CI](https://github.com/uxgnod/lumen-llm/actions/workflows/ci.yml/badge.svg)](https://github.com/uxgnod/lumen-llm/actions/workflows/ci.yml)
+[![Gem Version](https://badge.fury.io/rb/lumen-llm.svg)](https://rubygems.org/gems/lumen-llm)
+
 `lumen-llm` is a tiny Ruby LLM prompt runner for old Ruby and Rails apps.
 
 It provides the small set of features extracted from Lumen:
@@ -24,6 +27,14 @@ HTTP uses Ruby stdlib `net/http`. JSON, YAML, logger, URI, digest, and date are 
 Ruby 2.3 and 2.4 are end-of-life runtimes. This gem supports them for legacy Rails apps, but new applications should use a maintained Ruby when possible.
 
 ## Installation
+
+Install directly:
+
+```sh
+gem install lumen-llm
+```
+
+Or add it to your Gemfile:
 
 ```ruby
 gem "lumen-llm"
@@ -149,10 +160,19 @@ bin/setup
 bin/test
 bundle exec rake test
 bin/debug-template examples/templates/translator.yml examples/inputs/translator.json
+gem build --strict --output /tmp/lumen-llm-0.1.0.gem lumen-llm.gemspec
 ```
 
 The test suite uses Minitest and no real network calls.
 Minitest is capped below `5.16` because newer Minitest releases require Ruby 2.6+.
+
+## Contributing
+
+Bug reports and small pull requests are welcome. Please read [CONTRIBUTING.md](CONTRIBUTING.md) before proposing changes, especially the Ruby 2.3 compatibility rules and the no-runtime-dependency constraint.
+
+## Security
+
+Please do not report security vulnerabilities in public issues. See [SECURITY.md](SECURITY.md) for the private reporting process.
 
 ## Agent Skills
 
@@ -166,14 +186,18 @@ They help coding agents install, configure, test, and debug this gem without gue
 
 ## Release
 
-Build locally:
+Maintainers release through GitHub Actions and RubyGems Trusted Publishing.
+Normal pushes and pull requests only run checks; only `v*` tags trigger the release workflow.
+
+Build locally before tagging:
 
 ```sh
-gem build lumen-llm.gemspec
+gem build --strict --output /tmp/lumen-llm-0.1.0.gem lumen-llm.gemspec
 ```
 
-Publish after verifying the RubyGems name and metadata:
+After CI passes and RubyGems trusted publishing is configured, publish by pushing a version tag:
 
 ```sh
-gem push lumen-llm-0.1.0.gem
+git tag v0.1.0
+git push origin v0.1.0
 ```
